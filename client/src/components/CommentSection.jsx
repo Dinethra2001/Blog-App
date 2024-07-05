@@ -40,6 +40,7 @@ export default function CommentSection({ postId }) {
       setCommentError(error.message);
     }
   };
+
   useEffect(() => {
     const getComments = async () => {
       try {
@@ -81,6 +82,14 @@ export default function CommentSection({ postId }) {
     } catch (error) {
       console.log(error.message);
     }
+  };
+
+  const handleEdit = async (comment, editedContent) => {
+    setComments(
+      comments.map((c) =>
+        c._id === comment._id ? { ...c, content: editedContent } : c
+      )
+    );
   };
 
   return (
@@ -146,7 +155,7 @@ export default function CommentSection({ postId }) {
             </div>
           </div>
           {comments.map((comment) => (
-            <Comment key={comment._id} comment={comment} onLike={handleLike} />
+            <Comment key={comment._id} comment={comment} onLike={handleLike} onEdit={handleEdit} />
           ))}
         </>
       )}

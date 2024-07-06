@@ -1,7 +1,7 @@
 import { Sidebar } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiUser } from 'react-icons/hi';
+import { HiAnnotation, HiArrowSmRight, HiDocumentText, HiOutlineArrowSmRight, HiOutlineUserGroup, HiUser } from 'react-icons/hi';
 import { signoutSuccess } from '../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -52,14 +52,27 @@ const handleSignout = async () => {
                       </Sidebar.Item>
                   </Link>
                 )}
-                {currentUser.isAdmin && (
-                  <Link to='/dashboard?tab=users'>
-                      <Sidebar.Item active={tab === 'users'} icon={HiOutlineUserGroup} as='div'>
-                          Users
-                      </Sidebar.Item>
-                  </Link>
-                )}
-                <Sidebar.Item icon={HiArrowSmRight} className='cursor-pointer' onClick={handleSignout}>
+                <>
+              <Link to='/dashboard?tab=users'>
+                <Sidebar.Item
+                  active={tab === 'users'}
+                  icon={HiOutlineUserGroup}
+                  as='div'
+                >
+                  Users
+                </Sidebar.Item>
+              </Link>
+              <Link to='/dashboard?tab=comments'>
+                <Sidebar.Item
+                  active={tab === 'comments'}
+                  icon={HiAnnotation}
+                  as='div'
+                >
+                  Comments
+                </Sidebar.Item>
+              </Link>
+            </>
+                <Sidebar.Item icon={HiOutlineArrowSmRight} className='cursor-pointer' onClick={handleSignout}>
                     Sign Out
                 </Sidebar.Item>
             </Sidebar.ItemGroup>
